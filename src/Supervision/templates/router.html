@@ -1,0 +1,145 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style_router.css' %}">
+	<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+	<script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<title>Supervision panel</title>
+</head>
+<body>
+	<div class="container">
+		<div class="topbar">
+			<div class="logo">
+				<h2>Bibémi Net.</h2>
+			</div>
+			<div class="search">
+				<input type="text" id="search" placeholder="search here">
+				<label for="search"><i class="fas fa-search"></i></label>
+			</div>
+			<i class="fas fa-bell"></i>
+			<div class="user">
+				<img src="{% static 'img/user.png' %}" alt="">
+			</div>
+		</div>
+		<div class="sidebar">
+			<ul>
+				<li>
+					<a href="/map">
+						<i class="fas fa-map"></i>
+						<div>Cartographie</div>
+					</a>
+				</li>
+				<li>
+					<a href="/router/" class="map">
+						<i class="fas fa-server"></i>
+						<div>Equipements</div>
+					</a>
+				</li>
+				<li>
+					<a href="/application/">
+						<i class="fas fa-window-restore"></i>
+						<div>Applications</div>
+					</a>
+				</li>
+				<li>
+					<a href="/alert/">
+						<i class="fas fa-exclamation-triangle"></i>
+						<div>Alertes</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-users"></i>
+						<div>Utilisateurs</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-chart-bar"></i>
+						<div>Analytics</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-cog"></i>
+						<div>Settings</div>
+					</a>
+				</li>
+				<li>
+					<a href="/">
+						<i class="fas fa-sign-out-alt"></i>
+						<div>Exit</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-question"></i>
+						<div>Help</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="charts">
+
+				<div class="chart chart-description" >
+					<h2>Informations sur l'équipement</h2>
+					<pre>Nom:                                                            <b>R1</b></pre>
+					<pre>Model:                                                          <b>Cisco IOS Software, 7200 Software</b></pre>
+					<pre>Emplacement:                                           <b>Telecentre</b></pre>
+					<pre>Temps de fonctionnement:                    <b>2 hours 45 mins 7.15 seconds</b></pre>
+					<pre>Processus en cours d'execution:           <b>159</b></pre>
+				</div>
+
+				<div class="chart" >
+					<h2>Interfaces réseaux</h2>
+					<div>
+						<pre>Interface 1:             <b>FastEthernet0/0</b></pre>
+						<pre>10.10.11.1/24             <b style="color:#1aaa00;"><i>up</i></b></pre>
+					</div>
+					<br>
+					<div>
+						<pre>Interface 2:             <b>FastEthernet1/0</b></pre>
+						<pre>10.10.25.1/24           <b style="color:#1aaa00;"><i>up</i></b></pre>
+					</div>
+
+				</div>
+
+				<div class="chart" >
+					<h2>Utilisation de la bande passante</h2>
+					<div id='bandwidth'></div>
+				</div>
+
+				<div class="chart" >
+					<h2>Utilisation de la RAM</h2>
+					<div id='mem'></div>
+				</div>
+
+				<div class="chart chart-temp" >
+					<h2>Température de l'équipement</h2>
+					<div id='temp'></div>
+				</div>
+
+				<div class="chart chart-temp" >
+					<h2>Alimentation</h2>
+					<div id='alim'></div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+	<script src="{% static 'js/chart_temp.js' %}"></script>
+	<script src="{% static 'js/chart_memory.js' %}"></script>
+	<script src="{% static 'js/chart_bandwidth.js' %}"></script>
+	<script src="{% static 'js/chart_voltage.js' %}"></script>
+
+</body>
+</html>

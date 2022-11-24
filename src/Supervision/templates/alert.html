@@ -1,0 +1,283 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style_alert.css' %}">
+	<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js" integrity="sha512-Tfw6etYMUhL4RTki37niav99C6OHwMDB2iBT5S5piyHO+ltK2YX8Hjy9TXxhE1Gm/TmAV0uaykSpnHKFIAif/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<title>Supervision panel</title>
+</head>
+<body>
+	<div class="container">
+		<div class="topbar">
+			<div class="logo">
+				<h2>Bibémi Net.</h2>
+			</div>
+			<div class="search">
+				<input type="text" id="search" placeholder="search here">
+				<label for="search"><i class="fas fa-search"></i></label>
+			</div>
+			<i class="fas fa-bell"></i>
+			<div class="user">
+				<img src="{% static 'img/user.png' %}" alt="">
+			</div>
+		</div>
+		<div class="sidebar">
+			<ul>
+				<li>
+					<a href="/map">
+						<i class="fas fa-map"></i>
+						<div>Cartographie</div>
+					</a>
+				</li>
+				<li>
+					<a href="/router/">
+						<i class="fas fa-server"></i>
+						<div>Equipements</div>
+					</a>
+				</li>
+				<li>
+					<a href="/application/">
+						<i class="fas fa-window-restore"></i>
+						<div>Applications</div>
+					</a>
+				</li>
+				<li>
+					<a href="/alert/" class="map">
+						<i class="fas fa-exclamation-triangle"></i>
+						<div>Alertes</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-users"></i>
+						<div>Utilisateurs</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-chart-bar"></i>
+						<div>Analytics</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-cog"></i>
+						<div>Settings</div>
+					</a>
+				</li>
+				<li>
+					<a href="/">
+						<i class="fas fa-sign-out-alt"></i>
+						<div>Exit</div>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fas fa-question"></i>
+						<div>Help</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+
+			<div class="charts">
+
+				<div class="chart chart-log">
+					<h2>Alertes</h2>
+					<table class="logs">
+						<thead>
+						<tr>
+							<th>Equipement</th>
+							<th>Emplacement</th>
+							<th>Niveau de gravité</th>
+							<th>Details</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>R1</td>
+							<td>Telecentre</td>
+							<td><p class="status status-error">Très grave</p></td>
+							<td class="signification">FastEthernet0/0 is down</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		var options = {
+			series: [{
+				name: 'entrante',
+				  data: [4023, 7985, 3600, 5023, 6941, 2301, 2978]
+				}],
+				  chart: {
+				  height: 350,
+				  type: 'area'
+				},
+				dataLabels: {
+				  enabled: false
+				},
+				stroke: {
+				  curve: 'smooth'
+				},
+				xaxis: {
+				  type: 'datetime',
+				  categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+				},
+				tooltip: {
+				  x: {
+					format: 'dd/MM/yy HH:mm'
+				  },
+				},
+		};
+
+		var chart = new ApexCharts(document.querySelector("#traffic"), options);
+		chart.render();
+	</script>
+
+	<script>
+		var ctx = document.getElementById('status_code').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+				labels: ['200', '404', '403', '504', '500', '301'],
+				datasets: [{
+					label: 'Status code',
+					data: [150, 20, 10, 4, 3, 13],
+					backgroundColor: [
+						'rgba(41, 155, 99, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(120, 46, 139, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderColor: [
+						'rgba(41, 155, 99, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(120, 46, 139, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderWidth: 2
+				}]
+			},
+			options: {
+				maintainAspectRatio: true,
+				responsive: true,
+				plugins : {
+					datalabels : {
+						color: 'white',
+						align: 'center',
+						font: {
+							weight: 'bold',
+							size: 14
+						}
+            		}
+        		}
+			},
+			plugins:[ChartDataLabels]
+		});
+	</script>
+
+	<script>
+		var ctx = document.getElementById('method').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: ['GET', 'POST', 'PUT', 'DELETE'],
+				datasets: [{
+					label: 'Méthodes',
+					data: [125, 50, 20, 5],
+					backgroundColor: [
+						'rgba(75, 192, 192, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderColor: [
+						'rgba(75, 192, 192, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderWidth: 2
+				}]
+			},
+			options: {
+				maintainAspectRatio: true,
+				responsive: true,
+				plugins : {
+					datalabels : {
+						color: 'white',
+						align: 'center',
+						font: {
+							weight: 'bold',
+							size: 16
+						}
+            		}
+        		}
+			},
+			plugins:[ChartDataLabels]
+		});
+	</script>
+
+	<script>
+		var ctx = document.getElementById('request').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'polarArea',
+			data: {
+				labels: ['/content/app', '/wp-connect', '/enable/access', '/message/type'],
+				datasets: [{
+					label: 'Equipements',
+					data: [29, 36, 20, 15],
+					backgroundColor: [
+						'rgb(255, 99, 132)',
+					    'rgb(75, 192, 192)',
+					    'rgb(255, 205, 86)',
+					    'rgb(201, 203, 207)',
+					    'rgb(54, 162, 235)'
+					],
+					borderColor: [
+						'rgb(255, 99, 132)',
+					    'rgb(75, 192, 192)',
+					    'rgb(255, 205, 86)',
+					    'rgb(201, 203, 207)',
+					    'rgb(54, 162, 235)'
+					],
+					borderWidth: 2
+				}]
+			},
+			options: {
+				maintainAspectRatio: true,
+				responsive: true,
+				plugins : {
+					datalabels : {
+						color: 'white',
+						align: 'center',
+						font: {
+							weight: 'bold',
+							size: 16
+						}
+            		}
+        		}
+			},
+			plugins:[ChartDataLabels]
+		});
+	</script>
+
+</body>
+</html>
